@@ -1,0 +1,78 @@
+#include <stdio.h>
+
+int main (void){
+
+	int n = 0;
+	double x1, x2, x3;
+	double a1, a2, a3;
+	double b1, b2, b3;
+	double c1, c2, c3;
+	double A, B, C;
+	double Bt;														//変数b2コピー用
+
+	while(n = 1){
+
+		printf("　ガウスの消去法〜3×3ver〜\n\n");
+		printf("　｜a1 a2 a3｜｜x1｜　｜A｜\n");
+		printf("　｜b1 b2 b3｜｜x2｜＝｜B｜\n");
+		printf("　｜c1 c2 c3｜｜x3｜　｜C｜\n\n");
+		printf("＊入力順 a1→a2→a3→A→b1→b2〜＊\n\n");
+	
+		scanf("%le",&a1);
+		scanf("%le",&a2);
+		scanf("%le",&a3);
+		scanf("%le",&A);
+		scanf("%le",&b1);
+		scanf("%le",&b2);
+		scanf("%le",&b3);
+		scanf("%le",&B);
+		scanf("%le",&c1);
+		scanf("%le",&c2);
+		scanf("%le",&c3);
+		scanf("%le",&C);
+		
+		//　自分用メモ
+		//	(a1*x1) + (a2*x2) + (a3*x3) == A;
+		//	(b1*x1) + (b2*x2) + (b3*x3) == B;
+		//	(c1*x1) + (c2*x2) + (c3*x3) == C;
+
+		b2 =	b1*a2 - a1*b2;
+		b3 =	b1*a3 - a1*b3;
+		B = A*b1 - B*a1;
+	
+		c2 =	c1*a2 - a1*c2;
+		c3 =	c1*a3 - a1*c3;
+		C = A*c1 - C*a1;
+		
+		//　自分用メモ
+		//	(a1*x1) + (a2*x2) + (a3*x3) == A;
+		//	(b2f*x2) + (c3f*x3) == B;
+		//	(c2f*x2) + (c3f*x3) == C;
+	
+		Bt = b2;
+		b2 = c2*b2;
+		b3 = c2*b3;
+		B = B*c2;
+	
+		c3 = b3 - (Bt*c3);
+		C = B - C*Bt;
+		
+		//　自分用メモ
+		//	(a1*x1) + (a2*x2) + (a3*x3) == A;
+		//	(b2*x2) + (c3*x3) == B;
+		//	(c3*x3) == C;
+
+		x3 = C/c3;
+		x2 = (B - (b3)*x3) / b2;
+		x1 = (A - (a2)*x2 - (a3)*x3) / a1;		//xの導出
+			
+		printf("x1 --> %lf\n",x1);
+		printf("x2 --> %lf\n",x2);
+		printf("x3 --> %lf\n",x3);
+
+		n = n + 1;
+		break;
+  
+	}
+		
+}
